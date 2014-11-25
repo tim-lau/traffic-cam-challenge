@@ -52,6 +52,10 @@ $(document).ready(function() {
                 	setTimeout(function() {
                 		marker.setAnimation(null);	
                 	}, 2150);
+<<<<<<< HEAD
+=======
+
+>>>>>>> e77ca54d32d12ec74836d70d92e214a105fe0464
                 });
 
                 // If user clicks on the map, close the info window
@@ -62,7 +66,11 @@ $(document).ready(function() {
                 // Filters the markers based on user input
                 $("#search").bind('search keyup', function() {
                 	var query = this.value.toLowerCase();
+<<<<<<< HEAD
                 	// removes marker if user search input does not match
+=======
+                	// removes marker if search query does not exist 
+>>>>>>> e77ca54d32d12ec74836d70d92e214a105fe0464
                 	if (station.cameralabel.toLowerCase().indexOf(query) < 0) {
                 		marker.setMap(null);
                 	// leaves marker in if user search input matches
@@ -78,4 +86,9 @@ $(document).ready(function() {
 		.fail(function(error) {
 			window.alert(error);
 		})
+<<<<<<< HEAD
 });
+=======
+});
+
+>>>>>>> e77ca54d32d12ec74836d70d92e214a105fe0464
