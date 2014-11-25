@@ -13,12 +13,13 @@
 
 $(document).ready(function() {
 	var mapElem = document.getElementById('map');
+	// Centers the map and sets the zoom level
 	var mapOptions = {
 		center: {lat: 47.6, lng: -122.3},
 		zoom: 12 
 	};
 
-	// create the map
+	// create the map 
 	var map = new google.maps.Map(mapElem, mapOptions);
 	var infoWindow = new google.maps.InfoWindow();
 
