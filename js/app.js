@@ -27,19 +27,18 @@ $(document).ready(function() {
 	var markers = [];
 
 	$.getJSON('http://data.seattle.gov/resource/65fc-btcc.json')
-		.done(function(data) {
-			stations = data;
-
+	.done(function(data) {
+		stations = data;
 			// Populates map with markers according to latitude/longitude data
 			data.forEach(function(station) {
-                var marker = new google.maps.Marker({
-                    position: {
-                        lat: Number(station.location.latitude),
-                        lng: Number(station.location.longitude)
-                    },
-                    map: map
-                });
-                markers.push(marker);
+				var marker = new google.maps.Marker({
+					position: {
+						lat: Number(station.location.latitude),
+						lng: Number(station.location.longitude)
+					},
+					map: map
+				});
+				markers.push(marker);
 
                 // Shows info window when a marker is clicked
                 google.maps.event.addListener(marker, 'click', function() {
@@ -59,7 +58,7 @@ $(document).ready(function() {
 
                 // If user clicks on the map, close the info window
                 google.maps.event.addListener(map, 'click', function() {
-                    infoWindow.close();
+                	infoWindow.close();
                 });
 
                 // Filters the markers based on user input
@@ -69,18 +68,18 @@ $(document).ready(function() {
                 	if (station.cameralabel.toLowerCase().indexOf(query) < 0) {
                 		marker.setMap(null);
                 	// leaves marker in if search phrase exists
-                	} else {
-                		marker.setMap(map);
-                	}
-
-                });
+                } else {
+                	marker.setMap(map);
+                }
 
             });
-		})
+
+            });
+})
 		// If there is an error 
 		.fail(function(error) {
 			window.alert(error);
 		})
- 
-});
+		
+	});
 
