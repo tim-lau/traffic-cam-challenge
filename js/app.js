@@ -30,14 +30,14 @@ $(document).ready(function() {
 			stations = data;
 			// Populates map with markers according to latitude/longitude data
 			data.forEach(function(station) {
-                var marker = new google.maps.Marker({
-                    position: {
-                        lat: Number(station.location.latitude),
-                        lng: Number(station.location.longitude)
-                    },
-                    map: map
-                });
-                markers.push(marker);
+				var marker = new google.maps.Marker({
+					position: {
+						lat: Number(station.location.latitude),
+						lng: Number(station.location.longitude)
+					},
+					map: map
+				});
+				markers.push(marker);
 
                 // Shows info window when a marker is clicked
                 google.maps.event.addListener(marker, 'click', function() {
@@ -56,7 +56,7 @@ $(document).ready(function() {
 
                 // If user clicks on the map, close the info window
                 google.maps.event.addListener(map, 'click', function() {
-                    infoWindow.close();
+                	infoWindow.close();
                 });
 
                 // Filters the markers based on user input
@@ -69,7 +69,7 @@ $(document).ready(function() {
                 	} else {
                 		marker.setMap(map);
                 	}
-                }); 
+            	}); 
 
             });
 		}) 
@@ -78,4 +78,4 @@ $(document).ready(function() {
 		.fail(function(error) {
 			window.alert(error);
 		})
-});
+	});
