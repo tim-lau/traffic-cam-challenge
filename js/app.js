@@ -47,12 +47,23 @@ $(document).ready(function() {
                 	html += '<img src=' + station.imageurl.url + '>';
                 	infoWindow.setContent(html);
                 	infoWindow.open(map,this);
+
+                	// When clicked, marker bounces for about 2 seconds
+                	marker.setAnimation(google.maps.Animation.BOUNCE);
+                	setTimeout(function() {
+                		marker.setAnimation(null);	
+                	}, 2150);
+
+                });
+
+                // If user clicks on the map, close the info window
+                google.maps.event.addListener(map, 'click', function() {
+                    infoWindow.close();
                 });
 
                 $("#search").bind('search keyup', function() {
                 	var query = this.value.toLowerCase();
-                	console.log(query);
-
+                	// console.log(query);
                 	// removes marker if search query does not exist 
                 	if (station.cameralabel.toLowerCase().indexOf(query) < 0) {
                 		marker.setMap(null);
@@ -64,13 +75,14 @@ $(document).ready(function() {
                 });
 
             });
-			//success
 		})
+
 		.fail(function(error) {
-			window.alert('An error occurred!');
+			window.alert(error);
 		})
 		.always(function() {
 			//called on either success or failure
 		})
  
 });
+
