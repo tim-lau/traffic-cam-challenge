@@ -71,11 +71,11 @@ $(document).ready(function() {
                 	}
             	}); 
 
-            });
+        	});
 		}) 
 
 		// If there is an error loading data
 		.fail(function(error) {
 			window.alert(error);
 		})
-	});
+});
