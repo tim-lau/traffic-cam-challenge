@@ -18,22 +18,59 @@ $(document).ready(function() {
 		zoom: 12 // 0 = Earth to 21 = Max Zoom
 	};
 
-// add our map to the page in the "map" div
-// create the map
-	var map = new google.maps.Map(mapElem, mapOptions);
 
+	// create the map
+	var map = new google.maps.Map(mapElem, mapOptions);
 
 	var infoWindow = new google.maps.InfoWindow();
 
+	var stations;
+	var markers = [];
+
 	$.getJSON('http://data.seattle.gov/resource/65fc-btcc.json')
 		.done(function(data) {
+			stations = data;
+
+			data.forEach(function(station) {
+                var marker = new google.maps.Marker({
+                    position: {
+                        lat: Number(station.location.latitude),
+                        lng: Number(station.location.longitude)
+                    },
+                    map: map
+                });
+                markers.push(marker);
+
+                google.maps.event.addListener(marker, 'click', function() {
+                	map.panTo(marker.getPosition());
+                	var html = '<p>' + station.cameralabel + '</p>';
+                	html += '<img src=' + station.imageurl.url + '>';
+                	infoWindow.setContent(html);
+                	infoWindow.open(map,this);
+                });
+
+                $("#search").bind('search keyup', function() {
+                	var query = this.value.toLowerCase();
+                	console.log(query);
+
+                	// removes marker if search query does not exist 
+                	if (station.cameralabel.toLowerCase().indexOf(query) < 0) {
+                		marker.setMap(null);
+                	// leaves marker in if search phrase exists
+                	} else {
+                		marker.setMap(map);
+                	}
+
+                });
+
+            });
 			//success
 		})
 		.fail(function(error) {
-			console.log(error);
+			window.alert('An error occurred!');
 		})
 		.always(function() {
 			//called on either success or failure
 		})
-
+ 
 });
